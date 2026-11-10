@@ -14,7 +14,7 @@ echo ==========================================
 echo.
 
 REM ==================================================
-REM               REMOVE SCHEDULED TASK
+REM              REMOVE SCHEDULED TASK
 REM ==================================================
 
 schtasks /delete /tn "%TASK_NAME%" /f

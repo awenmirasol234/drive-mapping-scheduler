@@ -16,7 +16,7 @@ echo ==========================================
 echo.
 
 REM ==================================================
-REM                    CHECK SCRIPT
+REM                   CHECK SCRIPT
 REM ==================================================
 
 if not exist "%SCRIPT_PATH%" (
@@ -25,7 +25,7 @@ if not exist "%SCRIPT_PATH%" (
 )
 
 REM ==================================================
-REM               CREATE SCHEDULED TASK
+REM              CREATE SCHEDULED TASK
 REM ==================================================
 
 echo [INFO] Creating scheduled task...
@@ -45,7 +45,7 @@ if errorlevel 1 (
 echo [SUCCESS] Scheduled task created.
 
 REM ==================================================
-REM             EXPORT TASK CONFIGURATION
+REM            EXPORT TASK CONFIGURATION
 REM ==================================================
 
 echo.
@@ -61,12 +61,12 @@ if errorlevel 1 (
 echo [SUCCESS] scheduler.xml exported.
 
 REM ==================================================
-REM COMPLETE
+REM                     COMPLETE
 REM ==================================================
 
 echo.
 echo ==========================================
-echo [SUCCESS] INSTALLATION COMPLETED
+echo     [SUCCESS] INSTALLATION COMPLETED
 echo ==========================================
 echo Task Name: %TASK_NAME%
 echo Trigger:   User Logon
