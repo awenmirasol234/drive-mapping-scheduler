@@ -14,7 +14,7 @@ Automatically map network drives for domain users based on their Active Director
 ## Directory Structure
 
 ```text
-drive-mapping/
+drive-mapping-scheduler/
 ├── map-drives.bat
 ├── install-scheduler.bat
 ├── remove-scheduler.bat

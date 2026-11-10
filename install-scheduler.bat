@@ -5,7 +5,7 @@ REM ==================================================
 REM              SCHEDULER CONFIGURATION
 REM ==================================================
 
-set "TASK_NAME=DriveMapping"
+set "TASK_NAME=DriveMappingScheduler"
 set "SCRIPT_PATH=%~dp0map-drives.bat"
 set "XML_PATH=%~dp0scheduler.xml"
 
