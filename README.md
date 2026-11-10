@@ -41,12 +41,7 @@ Before deployment, update these settings in the configuration section at the top
 | Setting | Description |
 |---|---|
 | `NAS_SERVER` | NAS server hostname |
-| `STUDENT_GROUP` | Student security group |
-| `FACULTY_GROUP` | Faculty security group |
-| `ADMIN_GROUP` | Administrator security group |
-| `STUDENT_DRIVE` | Student network drive letter |
-| `FACULTY_DRIVE` | Faculty network drive letter |
-| `ADMIN_DRIVE` | Administrator network drive letter |
+| `MAP_1`, `MAP_2`, ... | Active Directory group, drive letter, and share in `Group|Drive|Share` format |
 
 Ensure that the configured SMB share names match the actual NAS configuration.
 

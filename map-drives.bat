@@ -9,9 +9,6 @@ REM Edit these settings in this file.
 REM NAS server hostname
 set "NAS_SERVER=NAS01"
 
-REM Number of mappings in the list below.
-set "MAP_COUNT=3"
-
 REM Format for each mapping: Group|Drive|Share
 REM Share may be a share name or a full UNC path.
 set "MAP_1=BSIT_Students|S:|Students"
@@ -41,15 +38,34 @@ echo [INFO] Removing previous managed mappings...
 echo [INFO] Checking security group membership...
 echo.
 
-for /l %%I in (1,1,%MAP_COUNT%) do (
-    call :GET_ENTRY %%I
-    if not "%ENTRY%"=="" (
-        for /f "tokens=1-3 delims=|" %%G in ("%ENTRY%") do (
-            if not "%%H"=="" net use "%%H" /delete /y >nul 2>&1
-            if not "%%G"=="" if not "%%H"=="" if not "%%I"=="" call :CHECK_GROUP "%%G" "%%H" "%%I"
+set "MAP_INDEX=1"
+
+:MAP_LOOP
+call :GET_ENTRY %MAP_INDEX%
+
+if "%ENTRY%"=="" goto :MAP_DONE
+
+for /f "tokens=1-3 delims=|" %%G in ("%ENTRY%") do (
+    if "%%I"=="" (
+        echo [WARNING] Invalid mapping line: %ENTRY%
+    ) else (
+        if "%%G"=="" (
+            echo [WARNING] Invalid mapping line: %ENTRY%
+        ) else (
+            if "%%H"=="" (
+                echo [WARNING] Invalid mapping line: %ENTRY%
+            ) else (
+                net use "%%H" /delete /y >nul 2>&1
+                call :CHECK_GROUP "%%G" "%%H" "%%I"
+            )
         )
     )
 )
+
+set /a MAP_INDEX+=1
+goto :MAP_LOOP
+
+:MAP_DONE
 
 REM ==================================================
 REM                    FINAL RESULT
@@ -91,7 +107,7 @@ set "SHARE=%~3"
 
 echo Checking group: %GROUP_NAME%
 
-whoami /groups /fo list | findstr /i /l /c:"%USERDOMAIN%\%GROUP_NAME%" >nul
+whoami /groups /fo list | findstr /i /l /e /c:"%USERDOMAIN%\%GROUP_NAME%" >nul
 
 if errorlevel 1 (
     echo [SKIP] User is not a member of %GROUP_NAME%.
