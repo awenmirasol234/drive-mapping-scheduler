@@ -1,8 +1,8 @@
 # Screenshots
 
-Store validation screenshots here.
+Save test screenshots in this folder.
 
-Use file names such as:
+Use names like:
 
 - `login-student.png`
 - `groups-student.png`
@@ -12,4 +12,4 @@ Use file names such as:
 - `task-query.png`
 - `task-startup-failed.png`
 
-Record each screenshot in `docs/validation-report.md`.
+Write each file name in `docs/validation-report.md`.
