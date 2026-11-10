@@ -9,20 +9,14 @@ REM Edit these settings in this file.
 REM NAS server hostname
 set "NAS_SERVER=NAS01"
 
-REM Active Directory security group names
-set "STUDENT_GROUP=BSIT_Students"
-set "FACULTY_GROUP=Faculty"
-set "ADMIN_GROUP=IT_Admins"
+REM Number of mappings in the list below.
+set "MAP_COUNT=3"
 
-REM SMB share names on the NAS
-set "STUDENT_SHARE=Students"
-set "FACULTY_SHARE=Faculty"
-set "ADMIN_SHARE=Admin"
-
-REM Network drive letters
-set "STUDENT_DRIVE=S:"
-set "FACULTY_DRIVE=F:"
-set "ADMIN_DRIVE=A:"
+REM Format for each mapping: Group|Drive|Share
+REM Share may be a share name or a full UNC path.
+set "MAP_1=BSIT_Students|S:|Students"
+set "MAP_2=Faculty|F:|Faculty"
+set "MAP_3=IT_Admins|A:|Admin"
 
 REM ==================================================
 REM                   INITIALIZATION
@@ -40,27 +34,22 @@ echo.
 set "MAP_FAILED=0"
 
 REM ==================================================
-REM          REMOVE PREVIOUS MANAGED MAPPINGS
+REM      REMOVE OLD MAPPINGS AND MAP NEW DRIVES
 REM ==================================================
 
 echo [INFO] Removing previous managed mappings...
-
-net use "%STUDENT_DRIVE%" /delete /y >nul 2>&1
-net use "%FACULTY_DRIVE%" /delete /y >nul 2>&1
-net use "%ADMIN_DRIVE%" /delete /y >nul 2>&1
-
-REM ==================================================
-REM      CHECK ACTIVE DIRECTORY GROUP MEMBERSHIP
-REM ==================================================
-
 echo [INFO] Checking security group membership...
 echo.
 
-call :CHECK_GROUP "%STUDENT_GROUP%" "%STUDENT_DRIVE%" "\\%NAS_SERVER%\%STUDENT_SHARE%"
-
-call :CHECK_GROUP "%FACULTY_GROUP%" "%FACULTY_DRIVE%" "\\%NAS_SERVER%\%FACULTY_SHARE%"
-
-call :CHECK_GROUP "%ADMIN_GROUP%" "%ADMIN_DRIVE%" "\\%NAS_SERVER%\%ADMIN_SHARE%"
+for /l %%I in (1,1,%MAP_COUNT%) do (
+    call :GET_ENTRY %%I
+    if not "%ENTRY%"=="" (
+        for /f "tokens=1-3 delims=|" %%G in ("%ENTRY%") do (
+            if not "%%H"=="" net use "%%H" /delete /y >nul 2>&1
+            if not "%%G"=="" if not "%%H"=="" if not "%%I"=="" call :CHECK_GROUP "%%G" "%%H" "%%I"
+        )
+    )
+)
 
 REM ==================================================
 REM                    FINAL RESULT
@@ -84,11 +73,18 @@ exit /b %MAP_FAILED%
 
 
 REM ==================================================
-REM             CHECK GROUP AND MAP DRIVE
+REM                   HELPER ROUTINES
 REM ==================================================
 
-:CHECK_GROUP
+REM Read MAP_n into ENTRY.
+:GET_ENTRY
+set "ENTRY="
+call set "ENTRY=%%MAP_%~1%%"
+exit /b 0
 
+
+REM Check group membership and map the drive.
+:CHECK_GROUP
 set "GROUP_NAME=%~1"
 set "DRIVE=%~2"
 set "SHARE=%~3"
@@ -104,6 +100,10 @@ if errorlevel 1 (
 )
 
 echo [MATCH] User belongs to %GROUP_NAME%.
+
+REM Convert a share name to a full UNC path.
+if not "%SHARE:~0,2%"=="\\" set "SHARE=\\%NAS_SERVER%\%SHARE%"
+
 echo [INFO] Mapping %DRIVE% to %SHARE%...
 
 net use "%DRIVE%" "%SHARE%" /persistent:yes
