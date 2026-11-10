@@ -2,15 +2,27 @@
 setlocal EnableExtensions
 
 REM ==================================================
-REM                  LOAD CONFIGURATION
+REM                  CONFIGURATION
 REM ==================================================
+REM Edit these settings in this file.
 
-if not exist "%~dp0config.bat" (
-    echo [ERROR] config.bat was not found.
-    exit /b 1
-)
+REM NAS server hostname
+set "NAS_SERVER=NAS01"
 
-call "%~dp0config.bat"
+REM Active Directory security group names
+set "STUDENT_GROUP=BSIT_Students"
+set "FACULTY_GROUP=Faculty"
+set "ADMIN_GROUP=IT_Admins"
+
+REM SMB share names on the NAS
+set "STUDENT_SHARE=Students"
+set "FACULTY_SHARE=Faculty"
+set "ADMIN_SHARE=Admin"
+
+REM Network drive letters
+set "STUDENT_DRIVE=S:"
+set "FACULTY_DRIVE=F:"
+set "ADMIN_DRIVE=A:"
 
 REM ==================================================
 REM                   INITIALIZATION
