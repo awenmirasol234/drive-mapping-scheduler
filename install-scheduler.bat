@@ -11,7 +11,7 @@ set "XML_PATH=%~dp0scheduler.xml"
 
 echo.
 echo ==========================================
-echo       DRIVE MAPPING SCHEDULER
+echo          DRIVE MAPPING SCHEDULER
 echo ==========================================
 echo.
 

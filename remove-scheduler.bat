@@ -9,7 +9,7 @@ set "TASK_NAME=DriveMapping"
 
 echo.
 echo ==========================================
-echo       REMOVE DRIVE MAPPING TASK
+echo         REMOVE DRIVE MAPPING TASK
 echo ==========================================
 echo.
 
