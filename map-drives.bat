@@ -21,7 +21,7 @@ set "FACULTY_DRIVE=F:"
 set "ADMIN_DRIVE=A:"
 
 REM ==================================================
-REM                  INITIALIZATION
+REM                   INITIALIZATION
 REM ==================================================
 
 echo.
@@ -36,7 +36,7 @@ echo.
 set "MAP_FAILED=0"
 
 REM ==================================================
-REM         REMOVE PREVIOUS MANAGED MAPPINGS
+REM          REMOVE PREVIOUS MANAGED MAPPINGS
 REM ==================================================
 
 echo [INFO] Removing previous managed mappings...
@@ -59,7 +59,7 @@ call :CHECK_GROUP "%FACULTY_GROUP%" "%FACULTY_DRIVE%" "\\%NAS_SERVER%\Faculty"
 call :CHECK_GROUP "%ADMIN_GROUP%" "%ADMIN_DRIVE%" "\\%NAS_SERVER%\Admin"
 
 REM ==================================================
-REM                  FINAL RESULT
+REM                    FINAL RESULT
 REM ==================================================
 
 echo.

@@ -2,7 +2,7 @@
 setlocal
 
 REM ==================================================
-REM SCHEDULER CONFIGURATION
+REM              SCHEDULER CONFIGURATION
 REM ==================================================
 
 set "TASK_NAME=DriveMapping"
@@ -14,7 +14,7 @@ echo ==========================================
 echo.
 
 REM ==================================================
-REM REMOVE SCHEDULED TASK
+REM               REMOVE SCHEDULED TASK
 REM ==================================================
 
 schtasks /delete /tn "%TASK_NAME%" /f
