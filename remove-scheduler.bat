@@ -5,7 +5,12 @@ REM ==================================================
 REM              SCHEDULER CONFIGURATION
 REM ==================================================
 
-set "TASK_NAME=DriveMapping"
+if not exist "%~dp0config.bat" (
+    echo [ERROR] config.bat was not found.
+    exit /b 1
+)
+
+call "%~dp0config.bat"
 
 echo.
 echo ==========================================

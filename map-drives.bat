@@ -44,11 +44,11 @@ REM ==================================================
 echo [INFO] Checking security group membership...
 echo.
 
-call :CHECK_GROUP "%STUDENT_GROUP%" "%STUDENT_DRIVE%" "\\%NAS_SERVER%\Students"
+call :CHECK_GROUP "%STUDENT_GROUP%" "%STUDENT_DRIVE%" "\\%NAS_SERVER%\%STUDENT_SHARE%"
 
-call :CHECK_GROUP "%FACULTY_GROUP%" "%FACULTY_DRIVE%" "\\%NAS_SERVER%\Faculty"
+call :CHECK_GROUP "%FACULTY_GROUP%" "%FACULTY_DRIVE%" "\\%NAS_SERVER%\%FACULTY_SHARE%"
 
-call :CHECK_GROUP "%ADMIN_GROUP%" "%ADMIN_DRIVE%" "\\%NAS_SERVER%\Admin"
+call :CHECK_GROUP "%ADMIN_GROUP%" "%ADMIN_DRIVE%" "\\%NAS_SERVER%\%ADMIN_SHARE%"
 
 REM ==================================================
 REM                    FINAL RESULT

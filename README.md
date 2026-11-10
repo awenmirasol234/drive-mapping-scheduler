@@ -80,7 +80,7 @@ The installer creates a scheduled task with this configuration:
 
 | Setting | Value |
 |---|---|
-| Task Name | `DriveMapping` |
+| Task Name | `DriveMappingScheduler` |
 | Trigger | At log on |
 | Delay | 1 minute |
 | Action | Execute `map-drives.bat` |
@@ -89,7 +89,7 @@ The installer creates a scheduled task with this configuration:
 ### 4. Verify Scheduled Task
 
 ```bat
-schtasks /query /tn DriveMapping /v /fo list
+schtasks /query /tn DriveMappingScheduler /v /fo list
 ```
 
 ### 5. Export Task Configuration
@@ -123,7 +123,7 @@ net use
 Run the scheduled task manually:
 
 ```bat
-schtasks /run /tn DriveMapping
+schtasks /run /tn DriveMappingScheduler
 ```
 
 Test across reboots:

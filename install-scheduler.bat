@@ -5,9 +5,15 @@ REM ==================================================
 REM              SCHEDULER CONFIGURATION
 REM ==================================================
 
-set "TASK_NAME=DriveMappingScheduler"
+if not exist "%~dp0config.bat" (
+    echo [ERROR] config.bat was not found.
+    exit /b 1
+)
+
+call "%~dp0config.bat"
+
 set "SCRIPT_PATH=%~dp0map-drives.bat"
-set "XML_PATH=%~dp0scheduler.xml"
+set "XML_PATH=%~dp0%XML_FILE%"
 
 echo.
 echo ==========================================
@@ -33,7 +39,7 @@ echo [INFO] Creating scheduled task...
 schtasks /create ^
     /tn "%TASK_NAME%" ^
     /sc ONLOGON ^
-    /delay 0001:00 ^
+    /delay %TASK_DELAY% ^
     /tr "cmd.exe /c ""%SCRIPT_PATH%""" ^
     /f
 
