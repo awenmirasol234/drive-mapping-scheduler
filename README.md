@@ -155,8 +155,8 @@ This removes the scheduled task without deleting the mapping scripts or exported
 
 ## Deliverables
 
-- [x] Network drive mapping batch script.
-- [x] Task Scheduler installation script.
+- [ ] Network drive mapping batch script.
+- [ ] Task Scheduler installation script.
 - [ ] Task Scheduler removal script.
 - [ ] Task Scheduler XML export.
 - [ ] Reboot test results.
