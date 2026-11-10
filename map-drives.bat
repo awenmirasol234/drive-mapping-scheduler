@@ -2,23 +2,15 @@
 setlocal EnableExtensions
 
 REM ==================================================
-REM            DRIVE MAPPING CONFIGURATION
+REM                  LOAD CONFIGURATION
 REM ==================================================
 
-REM NAS server hostname
-set "NAS_SERVER=NAS01"
+if not exist "%~dp0config.bat" (
+    echo [ERROR] config.bat was not found.
+    exit /b 1
+)
 
-REM Active Directory security group names
-REM Replace these with your actual AD group names.
-
-set "STUDENT_GROUP=BSIT_Students"
-set "FACULTY_GROUP=Faculty"
-set "ADMIN_GROUP=IT_Admins"
-
-REM Network drive letters
-set "STUDENT_DRIVE=S:"
-set "FACULTY_DRIVE=F:"
-set "ADMIN_DRIVE=A:"
+call "%~dp0config.bat"
 
 REM ==================================================
 REM                   INITIALIZATION

@@ -24,6 +24,7 @@ Automatically map network drives for domain users based on their Active Director
 
 ```text
 drive-mapping-scheduler/
+├── config.bat
 ├── map-drives.bat
 ├── install-scheduler.bat
 ├── remove-scheduler.bat
@@ -33,7 +34,7 @@ drive-mapping-scheduler/
 
 ## Configuration
 
-Before deployment, update these settings in `map-drives.bat`:
+Before deployment, update these settings in `config.bat`:
 
 | Setting | Description |
 |---|---|
@@ -51,7 +52,7 @@ Ensure that the configured SMB share names match the actual NAS configuration.
 
 ### 1. Configure Drive Mapping
 
-Update the NAS hostname, shared folder paths, drive letters, and Active Directory security group names in `map-drives.bat`.
+Update the NAS hostname, shared folder paths, drive letters, and Active Directory security group names in `config.bat`.
 
 ### 2. Test Drive Mapping
 
